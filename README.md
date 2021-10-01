@@ -1,6 +1,9 @@
 # Gitops InstallPlan Approver
 
-Allow for the installation of Operators and the auto approval of the install plan during an argo deploy when usinging manual approval method
+Allow for the auto approval of operators install plan during an argo driven gitops deploy when usinging manual upgrade method.
+
+Insteration for this was taken from https://github.com/redhat-cop/gitops-catalog/tree/main/installplan-approver however the purpose differes slightly.
+While the Install PLan Apporver will approve all install plans in a namespace this one targets a single operator. 
 
 ## Usage
 
@@ -14,7 +17,7 @@ namePrefix: <name-of-subscription>-
 namespace: <operator-subcription-namespace>
 
 bases:
-- https://github.com/Siythrun/gitops-installplan-approver
+- github.com/Siythrun/gitops-installplan-approver?ref=main
 
 ```
 ### Sync Waves
