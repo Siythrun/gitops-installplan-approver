@@ -2,7 +2,7 @@
 
 Allow for the installation of Operators and the auto approval of the install plan during an argo deploy when usinging manual approval method
 
-#Usage
+## Usage
 
 Add the following kustomization.yaml into a folder and refer to it from the main Operator Kustomise location
 
