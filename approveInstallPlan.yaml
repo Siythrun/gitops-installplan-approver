@@ -1,0 +1,35 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: patch-ip
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/openshift4/ose-cli:v4.6
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set -e
+              subsciptionName=${POD_NAME%"-patch-ip"*}
+              echo "Patching ${subsciptionName} install plan"
+              installPlan=$(oc get subscriptions.operators.coreos.com --field-selector metadata.name=${subsciptionName} -o jsonpath='{.items[0].status.installPlanRef.name}')
+              echo "Patching ${installPlan}....."
+              oc patch installPlan ${installPlan} --type merge --patch '{"spec":{"approved":true}}'
+              echo "Waiting for ${installPlan} to install...."
+              oc wait installPlan ${installPlan} --for=condition=Installed --timeout=60s
+          imagePullPolicy: Always
+          name: patch-ip
+          env:
+            - name: POD_NAME
+              valueFrom:
+                fieldRef:
+                  apiVersion: v1
+                  fieldPath: metadata.name
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccountName: installplan-approver-job
+      terminationGracePeriodSeconds: 30
