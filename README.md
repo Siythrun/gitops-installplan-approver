@@ -17,8 +17,10 @@ bases:
 - https://github.com/Siythrun/gitops-installplan-approver
 
 ```
+### Sync Waves
 
-For any manafest that you would like to have run after the Operator is installed will need the following Annotaion
+This repo manke use of Sync Waves to have Objects apply in the correct order by deafult it is set to 1 therefor for any manifest that you would like to have run after the Operator is installed will need the following Annotaion.
+
 
 ```
 metadata:
@@ -26,3 +28,5 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
     argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 ```
+
+More info on sync waves can be found https://argoproj.github.io/argo-cd/user-guide/sync-waves/
