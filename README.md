@@ -2,7 +2,7 @@
 
 Allow for the auto approval of operators install plan during an argo driven gitops deploy when usinging manual upgrade method.
 
-Insteration for this was taken from https://github.com/redhat-cop/gitops-catalog/tree/main/installplan-approver however the purpose differes slightly.
+Inspiration for this was taken from https://github.com/redhat-cop/gitops-catalog/tree/main/installplan-approver however the purpose differes slightly.
 While the Install PLan Apporver will approve all install plans in a namespace this one targets a single operator. 
 
 ## Usage
